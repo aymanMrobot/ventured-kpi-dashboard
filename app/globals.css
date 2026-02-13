@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS variables for colours and fonts */
+:root {
+  --color-background: #050607;
+  --color-surface: #0B0F10;
+  --color-text: #F5F7F8;
+  --color-muted: #A7B0B7;
+  --color-brand: #0AA8B7;
+  --color-brand-light: #81D7DC;
+  --color-brand-dark: #0A5E64;
+  --color-border: rgba(255, 255, 255, 0.08);
+}
+
+html {
+  @apply antialiased;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+body {
+  @apply min-h-screen;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-brand);
+  color: var(--color-background);
+  padding: 0.5rem 1rem;
+  z-index: 50;
+  transition: top 0.3s ease;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+    scroll-behavior: auto !important;
+  }
+}
