@@ -13,6 +13,9 @@ import {
   Mail,
   Sparkles,
   Settings,
+  Megaphone,
+  Users,
+  Server,
 } from 'lucide-react';
 import { cn } from '@/lib/utils/cn';
 
@@ -25,7 +28,10 @@ interface NavItem {
 const navItems: NavItem[] = [
   { href: '/overview', label: 'Overview', icon: <LayoutDashboard size={18} /> },
   { href: '/sales', label: 'Sales', icon: <TrendingUp size={18} /> },
+  { href: '/marketing', label: 'Marketing', icon: <Megaphone size={18} /> },
   { href: '/support', label: 'Support', icon: <Headphones size={18} /> },
+  { href: '/csm', label: 'CSM', icon: <Users size={18} /> },
+  { href: '/devops', label: 'DevOps', icon: <Server size={18} /> },
   { href: '/emails', label: 'Emails', icon: <Mail size={18} /> },
   { href: '/ai', label: 'AI Insights', icon: <Sparkles size={18} /> },
   { href: '/settings', label: 'Settings', icon: <Settings size={18} /> },
@@ -77,20 +83,14 @@ export default function Sidebar() {
 
       {/* Desktop sidebar */}
       <aside className="hidden md:flex md:w-[260px] flex-col border-r border-white/[0.06] bg-surface/50 backdrop-blur-xl">
-        <div className="flex items-center gap-3 px-6 py-6">
-          <div className="relative">
-            <Image
-              src="/brand/ventured-logo.png"
-              alt="VenturEd Solutions"
-              width={40}
-              height={40}
-              className="rounded-lg"
-            />
-          </div>
-          <div>
-            <span className="text-base font-semibold tracking-tight">VenturEd</span>
-            <p className="text-[11px] text-text/40 font-medium">KPI Dashboard</p>
-          </div>
+        <div className="flex items-center justify-center px-6 py-8">
+          <Image
+            src="/brand/ventured-logo.png"
+            alt="VenturEd Solutions"
+            width={80}
+            height={80}
+            className="rounded-2xl"
+          />
         </div>
 
         <div className="h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent mx-4" />
@@ -121,14 +121,10 @@ export default function Sidebar() {
                 <Image
                   src="/brand/ventured-logo.png"
                   alt="VenturEd Solutions"
-                  width={36}
-                  height={36}
-                  className="rounded-lg"
+                  width={60}
+                  height={60}
+                  className="rounded-xl"
                 />
-                <div>
-                  <span className="text-base font-semibold tracking-tight">VenturEd</span>
-                  <p className="text-[11px] text-text/40 font-medium">KPI Dashboard</p>
-                </div>
               </div>
               <button
                 aria-label="Close navigation"

@@ -22,7 +22,7 @@ export default function Topbar({ title, subtitle, minDate, maxDate, children }: 
         {subtitle && <p className="text-sm text-muted mt-1.5">{subtitle}</p>}
       </div>
       <div className="flex items-center gap-3">
-        <DateRangePicker min={minDate} max={maxDate} />
+        {minDate && maxDate && <DateRangePicker min={minDate} max={maxDate} />}
         {children}
       </div>
     </div>

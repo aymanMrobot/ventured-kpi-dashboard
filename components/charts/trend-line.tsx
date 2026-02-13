@@ -16,6 +16,13 @@ interface TrendLineProps {
   ariaLabel: string;
 }
 
+/** Format ISO date to a short readable label. */
+function shortDate(iso: string) {
+  const parts = iso.split('-');
+  if (parts.length < 3) return iso;
+  return `${parts[2]}/${parts[1]}`;
+}
+
 export default function TrendLine({ series, ariaLabel, className }: TrendLineProps) {
   const dateSet = new Set<string>();
   series.forEach((s) => {
@@ -37,14 +44,27 @@ export default function TrendLine({ series, ariaLabel, className }: TrendLinePro
     ...series.map((s) => row[s.name] as number),
   ]);
 
+  // Show a max of ~10 ticks on x-axis to avoid crowding
+  const tickInterval = Math.max(0, Math.floor(combined.length / 10) - 1);
+
   return (
     <div className={cn('flex flex-col gap-4', className)}>
-      <div aria-label={ariaLabel} className="h-72">
+      <div aria-label={ariaLabel} className="h-[340px]">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={combined} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
-            <XAxis dataKey="date" stroke="var(--color-muted)" style={{ fontSize: '11px' }} tick={{ fill: 'var(--color-muted)' }} axisLine={{ stroke: 'rgba(255,255,255,0.06)' }} tickLine={false} />
-            <YAxis stroke="var(--color-muted)" style={{ fontSize: '11px' }} tick={{ fill: 'var(--color-muted)' }} axisLine={false} tickLine={false} allowDecimals={false} />
-            <Tooltip contentStyle={{ backgroundColor: '#111617', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', fontSize: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.4)' }} cursor={{ stroke: 'rgba(255,255,255,0.06)' }} />
+          <LineChart data={combined} margin={{ top: 5, right: 24, left: 0, bottom: 0 }}>
+            <XAxis
+              dataKey="date"
+              tick={{ fill: 'var(--color-muted)', fontSize: 10 }}
+              axisLine={{ stroke: 'rgba(255,255,255,0.06)' }}
+              tickLine={false}
+              tickFormatter={shortDate}
+              interval={tickInterval}
+            />
+            <YAxis tick={{ fill: 'var(--color-muted)', fontSize: 11 }} axisLine={false} tickLine={false} allowDecimals={false} />
+            <Tooltip
+              contentStyle={{ backgroundColor: '#111617', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', fontSize: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.4)' }}
+              cursor={{ stroke: 'rgba(255,255,255,0.06)' }}
+            />
             <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '12px' }} />
             {series.map((s, index) => (
               <Line

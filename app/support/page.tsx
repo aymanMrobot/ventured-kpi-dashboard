@@ -36,23 +36,23 @@ export default async function SupportPage({ searchParams }: SupportPageProps) {
   ];
   return (
     <div className="flex flex-col gap-6">
-      <Topbar title="Support" subtitle="Department view" minDate={minDate} maxDate={maxDate} />
+      <Topbar title="Support" subtitle="Support activity" minDate={minDate} maxDate={maxDate} />
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold">Top performers</h2>
-          <BarRanked data={metrics.topPerformers} label="User" valueLabel="Activities" ariaLabel="Top performers" />
+          <h2 className="text-lg font-semibold">Support performers</h2>
+          <BarRanked data={metrics.topPerformers} label="User" valueLabel="Activities" ariaLabel="Support performers" />
         </div>
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold">Call outcomes</h2>
-          <Distribution data={metrics.callsByOutcome} label="Outcome" ariaLabel="Call outcomes" />
+          <h2 className="text-lg font-semibold">Support call outcomes</h2>
+          <Distribution data={metrics.callsByOutcome} label="Outcome" ariaLabel="Support call outcomes" />
         </div>
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold">Email status</h2>
-          <Distribution data={metrics.emailsByStatus} label="Status" ariaLabel="Email status" />
+          <h2 className="text-lg font-semibold">Support email status</h2>
+          <Distribution data={metrics.emailsByStatus} label="Status" ariaLabel="Support email status" />
         </div>
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold">Activity trend</h2>
-          <TrendLine series={series} ariaLabel="Activities per day" />
+          <h2 className="text-lg font-semibold">Support activity trend</h2>
+          <TrendLine series={series} ariaLabel="Support activities per day" />
         </div>
       </div>
     </div>
