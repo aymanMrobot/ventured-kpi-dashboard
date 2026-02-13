@@ -16,12 +16,12 @@ interface TopbarProps {
  */
 export default function Topbar({ title, subtitle, minDate, maxDate, children }: TopbarProps) {
   return (
-    <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between pb-6 border-b border-white/[0.06]">
       <div>
-        <h1 className="text-2xl font-semibold leading-tight">{title}</h1>
-        {subtitle && <p className="text-sm text-muted mt-1">{subtitle}</p>}
+        <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-text to-text/70 bg-clip-text">{title}</h1>
+        {subtitle && <p className="text-sm text-muted mt-1.5">{subtitle}</p>}
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         <DateRangePicker min={minDate} max={maxDate} />
         {children}
       </div>

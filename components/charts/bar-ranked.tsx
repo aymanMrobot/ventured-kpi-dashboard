@@ -6,32 +6,25 @@ import { cn } from '@/lib/utils/cn';
 
 interface BarRankedProps {
   data: KeyCount[];
-  /** Label for the name axis */
-  label: string;
-  /** Label for the value axis */
-  valueLabel: string;
-  color?: string;
-  ariaLabel: string;
   className?: string;
+  ariaLabel: string;
+  label?: string;
+  valueLabel?: string;
 }
 
-/**
- * Bar chart component for ranked key/count pairs. Includes a hidden table fallback.
- */
-export default function BarRanked({ data, label, valueLabel, color, ariaLabel, className }: BarRankedProps) {
-  const chartData = data.map((item) => ({ name: item.key, value: item.count }));
-  const headers = [label, valueLabel];
-  const rows = chartData.map((d) => [d.name, d.value]);
+export default function BarRanked({ data, ariaLabel, className }: BarRankedProps) {
+  const headers = ['Name', 'Count'];
+  const rows = data.map((d) => [d.key, d.count]);
+
   return (
     <div className={cn('flex flex-col gap-4', className)}>
-      <div aria-label={ariaLabel} className="h-64">
+      <div aria-label={ariaLabel} className="h-72">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chartData} layout="vertical" margin={{ top: 10, right: 20, left: 40, bottom: 10 }}>
-            <XAxis type="number" stroke="var(--color-muted)" style={{ fontSize: '12px' }} allowDecimals={false} />
-            <YAxis type="category" dataKey="name" stroke="var(--color-muted)" style={{ fontSize: '12px' }} width={120} />
-            <Tooltip contentStyle={{ backgroundColor: '#0B0F10', border: '1px solid var(--color-border)', fontSize: '12px' }} />
-            <Legend wrapperStyle={{ fontSize: '12px' }} />
-            <Bar dataKey="value" name={valueLabel} fill={color || 'var(--color-brand)'} barSize={12} />
+          <BarChart data={data} layout="vertical" margin={{ top: 10, right: 20, left: 80, bottom: 0 }}>
+            <XAxis type="number" stroke="var(--color-muted)" style={{ fontSize: '11px' }} tick={{ fill: 'var(--color-muted)' }} axisLine={{ stroke: 'rgba(255,255,255,0.06)' }} tickLine={false} allowDecimals={false} />
+            <YAxis type="category" dataKey="key" stroke="var(--color-muted)" style={{ fontSize: '11px' }} tick={{ fill: 'var(--color-muted)' }} axisLine={false} tickLine={false} />
+            <Tooltip contentStyle={{ backgroundColor: '#111617', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', fontSize: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.4)' }} cursor={{ fill: 'rgba(255,255,255,0.03)' }} />
+            <Bar dataKey="count" fill="var(--color-brand)" radius={[0, 4, 4, 0]} maxBarSize={28} />
           </BarChart>
         </ResponsiveContainer>
       </div>

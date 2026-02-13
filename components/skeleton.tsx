@@ -2,11 +2,18 @@ import { cn } from '@/lib/utils/cn';
 
 interface SkeletonProps {
   className?: string;
+  'aria-label'?: string;
 }
 
-/**
- * A simple skeleton loader used as a placeholder while content is loading.
- */
-export default function Skeleton({ className }: SkeletonProps) {
-  return <div className={cn('animate-pulse rounded bg-surface/50', className)} />;
+export default function Skeleton({ className, ...props }: SkeletonProps) {
+  return (
+    <div
+      className={cn(
+        'rounded-xl bg-white/[0.04] animate-pulse',
+        className,
+      )}
+      role="status"
+      aria-label={props['aria-label'] || 'Loading…'}
+    />
+  );
 }

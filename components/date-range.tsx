@@ -11,83 +11,69 @@ interface DateRangeProps {
 }
 
 /**
- * A simple date range picker that reads and writes `from` and `to` values via the URL
- * search parameters. When the values change the page URL is updated without a full reload.
+ * Date range picker that syncs with URL search params
  */
 export default function DateRangePicker({ min, max }: DateRangeProps) {
-  const searchParams = useSearchParams();
   const router = useRouter();
-  // Read initial values from the query string or fall back to the provided min/max
-  const urlFrom = searchParams.get('from') || min;
-  const urlTo = searchParams.get('to') || max;
-  const [from, setFrom] = useState(urlFrom);
-  const [to, setTo] = useState(urlTo);
+  const searchParams = useSearchParams();
+  const [from, setFrom] = useState(searchParams.get('from') || min);
+  const [to, setTo] = useState(searchParams.get('to') || max);
 
-  // Keep internal state in sync when the URL changes
   useEffect(() => {
-    setFrom(urlFrom);
-    setTo(urlTo);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [urlFrom, urlTo]);
+    if (searchParams.get('from')) setFrom(searchParams.get('from')!);
+    if (searchParams.get('to')) setTo(searchParams.get('to')!);
+  }, [searchParams]);
 
-  function applyRange(newFrom: string, newTo: string) {
-    // Validate dates
-    const fromDate = parseIsoDate(newFrom);
-    const toDate = parseIsoDate(newTo);
-    if (!fromDate || !toDate || fromDate > toDate) {
-      return;
-    }
-    const params = new URLSearchParams(Array.from(searchParams.entries()));
-    params.set('from', newFrom);
-    params.set('to', newTo);
-    // Update the current route without scroll
-    router.push(`?${params.toString()}`, { scroll: false });
+  function handleApply() {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('from', from);
+    params.set('to', to);
+    router.push(`?${params.toString()}`);
   }
 
+  const fromParsed = parseIsoDate(from);
+  const toParsed = parseIsoDate(to);
+  const isValid = fromParsed && toParsed && fromParsed <= toParsed;
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        applyRange(from, to);
-      }}
-      className="flex items-end gap-2"
-    >
-      <div className="flex flex-col">
-        <label htmlFor="from-date" className="text-xs text-muted mb-1">
+    <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 rounded-lg bg-white/[0.04] border border-white/[0.08] px-3 py-1.5">
+        <label htmlFor="date-from" className="text-[11px] font-medium text-muted uppercase tracking-wider">
           From
         </label>
         <input
-          id="from-date"
-          name="from"
+          id="date-from"
           type="date"
           value={from}
-          min={min}
-          max={to}
           onChange={(e) => setFrom(e.target.value)}
-          className="rounded-md bg-surface border border-[var(--color-border)] text-sm px-2 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+          className="bg-transparent text-sm text-text focus:outline-none [color-scheme:dark]"
+          min={min}
+          max={max}
+          aria-label="Start date"
         />
       </div>
-      <div className="flex flex-col">
-        <label htmlFor="to-date" className="text-xs text-muted mb-1">
+      <div className="flex items-center gap-2 rounded-lg bg-white/[0.04] border border-white/[0.08] px-3 py-1.5">
+        <label htmlFor="date-to" className="text-[11px] font-medium text-muted uppercase tracking-wider">
           To
         </label>
         <input
-          id="to-date"
-          name="to"
+          id="date-to"
           type="date"
           value={to}
-          min={from}
-          max={max}
           onChange={(e) => setTo(e.target.value)}
-          className="rounded-md bg-surface border border-[var(--color-border)] text-sm px-2 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+          className="bg-transparent text-sm text-text focus:outline-none [color-scheme:dark]"
+          min={min}
+          max={max}
+          aria-label="End date"
         />
       </div>
       <button
-        type="submit"
-        className="rounded-md bg-brand text-background px-3 py-2 text-sm font-medium hover:bg-brand-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+        onClick={handleApply}
+        disabled={!isValid}
+        className="rounded-lg bg-brand px-4 py-1.5 text-sm font-semibold text-background transition-all duration-200 hover:bg-brand-light disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_1px_3px_rgba(10,168,183,0.3)]"
       >
         Apply
       </button>
-    </form>
+    </div>
   );
 }

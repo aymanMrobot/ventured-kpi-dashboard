@@ -6,8 +6,8 @@ import Sidebar from '@/components/sidebar';
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata = {
-  title: 'VenturEd Executive Dashboard',
-  description: 'Executive dashboard for VenturEd Solutions',
+  title: 'VenturEd KPI Dashboard',
+  description: 'Executive KPI dashboard for VenturEd Solutions — Track calls, emails, sales, and support metrics.',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -20,8 +20,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </a>
         <div className="flex min-h-screen">
           <Sidebar />
-          <div className="flex flex-1 flex-col">
-            <main id="main-content" className="flex-1 p-4 md:p-6">
+          <div className="flex flex-1 flex-col overflow-x-hidden">
+            <main id="main-content" className="flex-1 p-6 md:p-8 lg:p-10">
               {children}
             </main>
           </div>

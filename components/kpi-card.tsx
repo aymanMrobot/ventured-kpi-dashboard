@@ -4,28 +4,24 @@ import { cn } from '@/lib/utils/cn';
 
 interface KpiCardProps {
   title: string;
-  value: ReactNode;
+  value: string | number;
   subtitle?: string;
   right?: ReactNode;
-  className?: string;
 }
 
-export default function KpiCard({ title, value, subtitle, right, className }: KpiCardProps) {
+export default function KpiCard({ title, value, subtitle, right }: KpiCardProps) {
   return (
-    <Card
-      className={cn(
-        'min-w-[12rem] flex flex-col justify-between gap-2 scroll-snap-start',
-        className,
-      )}
-    >
-      <div className="flex justify-between items-start">
-        <div>
-          <p className="text-sm font-medium text-muted mb-1">{title}</p>
-          <div className="text-2xl font-semibold">{value}</div>
+    <Card className="min-w-[200px] snap-start group">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col gap-1">
+          <span className="text-xs font-medium text-muted uppercase tracking-wider">{title}</span>
+          <span className="text-2xl font-bold tabular-nums tracking-tight">{value}</span>
+          {subtitle && (
+            <span className="text-xs text-muted">{subtitle}</span>
+          )}
         </div>
-        {right && <div>{right}</div>}
+        {right && <div className="flex-shrink-0">{right}</div>}
       </div>
-      {subtitle && <p className="text-xs text-muted">{subtitle}</p>}
     </Card>
   );
 }

@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 import * as xlsx from 'xlsx';
 import { cache } from 'react';
 import { parseUKDate, parseIsoDate, toIsoDate } from '../utils/date';
@@ -44,7 +45,9 @@ function normaliseCell(value: unknown): string {
 function findHeaderIndex(rows: any[][], required: string[]): number {
   return rows.findIndex((row) => {
     const lowerCells = row.map((cell) => String(cell || '').toLowerCase().trim());
-    return required.every((key) => lowerCells.includes(key.toLowerCase()));
+    return required.every((key) =>
+      lowerCells.some((cell) => cell.startsWith(key.toLowerCase())),
+    );
   });
 }
 
@@ -53,7 +56,8 @@ function findHeaderIndex(rows: any[][], required: string[]): number {
  */
 export const loadCalls = cache(async (): Promise<CallRow[]> => {
   const filePath = path.join(process.cwd(), 'data', 'calls.xlsx');
-  const workbook = xlsx.readFile(filePath, { cellDates: false });
+  const buffer = fs.readFileSync(filePath);
+  const workbook = xlsx.read(buffer, { cellDates: false });
   const sheetName = workbook.SheetNames[0];
   const sheet = workbook.Sheets[sheetName];
   const rawRows: any[][] = xlsx.utils.sheet_to_json(sheet, {
@@ -133,7 +137,8 @@ export const loadCalls = cache(async (): Promise<CallRow[]> => {
  */
 export const loadEmails = cache(async (): Promise<EmailRow[]> => {
   const filePath = path.join(process.cwd(), 'data', 'emails.xlsx');
-  const workbook = xlsx.readFile(filePath, { cellDates: false });
+  const buffer = fs.readFileSync(filePath);
+  const workbook = xlsx.read(buffer, { cellDates: false });
   const sheetName = workbook.SheetNames[0];
   const sheet = workbook.Sheets[sheetName];
   const rawRows: any[][] = xlsx.utils.sheet_to_json(sheet, {
