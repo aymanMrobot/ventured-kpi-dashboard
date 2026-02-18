@@ -55,15 +55,15 @@ export default function TrendLine({ series, ariaLabel, className }: TrendLinePro
             <XAxis
               dataKey="date"
               tick={{ fill: 'var(--color-muted)', fontSize: 10 }}
-              axisLine={{ stroke: 'rgba(255,255,255,0.06)' }}
+              axisLine={{ stroke: 'var(--chart-grid)' }}
               tickLine={false}
               tickFormatter={shortDate}
               interval={tickInterval}
             />
             <YAxis tick={{ fill: 'var(--color-muted)', fontSize: 11 }} axisLine={false} tickLine={false} allowDecimals={false} />
             <Tooltip
-              contentStyle={{ backgroundColor: '#111617', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', fontSize: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.4)' }}
-              cursor={{ stroke: 'rgba(255,255,255,0.06)' }}
+              contentStyle={{ backgroundColor: 'var(--tooltip-bg)', border: '1px solid var(--color-border)', borderRadius: '8px', fontSize: '12px', boxShadow: 'var(--shadow-card)', color: 'var(--color-text)' }}
+              cursor={{ stroke: 'var(--chart-grid)' }}
             />
             <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '12px' }} />
             {series.map((s, index) => (
@@ -74,7 +74,7 @@ export default function TrendLine({ series, ariaLabel, className }: TrendLinePro
                 stroke={s.color || `var(--color-brand${index % 2 === 0 ? '' : '-light'})`}
                 strokeWidth={2}
                 dot={false}
-                activeDot={{ r: 4, strokeWidth: 2, fill: '#111617' }}
+                activeDot={{ r: 4, strokeWidth: 2, fill: 'var(--color-surface)' }}
               />
             ))}
           </LineChart>

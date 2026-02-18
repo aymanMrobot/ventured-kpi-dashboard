@@ -12,21 +12,23 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#0AA8B7',
-          light: '#81D7DC',
-          dark: '#0A5E64',
+          DEFAULT: 'var(--color-brand)',
+          light: 'var(--color-brand-light)',
+          dark: 'var(--color-brand-dark)',
         },
         background: {
-          DEFAULT: '#050607',
+          DEFAULT: 'var(--color-background)',
         },
         surface: {
-          DEFAULT: '#0B0F10',
+          DEFAULT: 'var(--color-surface)',
+          elevated: 'var(--color-surface-elevated)',
         },
         text: {
-          DEFAULT: '#F5F7F8',
-          muted: '#A7B0B7',
+          DEFAULT: 'var(--color-text)',
+          muted: 'var(--color-muted)',
         },
-        border: 'rgba(255,255,255,0.08)',
+        border: 'var(--color-border)',
+        muted: 'var(--color-muted)',
       },
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],

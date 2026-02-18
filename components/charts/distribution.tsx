@@ -29,7 +29,7 @@ export default function Distribution({ data, ariaLabel, className }: Distributio
             <XAxis
               dataKey="shortKey"
               tick={{ fill: 'var(--color-muted)', fontSize: 10 }}
-              axisLine={{ stroke: 'rgba(255,255,255,0.06)' }}
+              axisLine={{ stroke: 'var(--chart-grid)' }}
               tickLine={false}
               angle={-45}
               textAnchor="end"
@@ -38,8 +38,8 @@ export default function Distribution({ data, ariaLabel, className }: Distributio
             />
             <YAxis tick={{ fill: 'var(--color-muted)', fontSize: 11 }} axisLine={false} tickLine={false} allowDecimals={false} />
             <Tooltip
-              contentStyle={{ backgroundColor: '#111617', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', fontSize: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.4)' }}
-              cursor={{ fill: 'rgba(255,255,255,0.03)' }}
+              contentStyle={{ backgroundColor: 'var(--tooltip-bg)', border: '1px solid var(--color-border)', borderRadius: '8px', fontSize: '12px', boxShadow: 'var(--shadow-card)', color: 'var(--color-text)' }}
+              cursor={{ fill: 'var(--color-border-subtle)' }}
               formatter={(value: number) => [value, 'Count']}
               labelFormatter={(label: string) => {
                 const item = chartData.find((d) => d.shortKey === label);

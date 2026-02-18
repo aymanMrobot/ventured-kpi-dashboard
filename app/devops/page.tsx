@@ -52,7 +52,7 @@ export default function DevOpsPage() {
                     {plannedFeatures.map((feature) => (
                         <Card key={feature.title}>
                             <div className="flex gap-3">
-                                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/[0.04] flex items-center justify-center text-text/50">
+                                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[var(--color-surface-elevated)] flex items-center justify-center text-[var(--color-muted)]">
                                     {feature.icon}
                                 </div>
                                 <div>

@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* CSS variables for colours and fonts */
-:root {
+/* ── Dark theme (default) ──────────────────────────────────── */
+:root,
+.dark {
   --color-background: #050607;
   --color-surface: #0B0F10;
   --color-surface-elevated: #111617;
@@ -14,8 +15,32 @@
   --color-brand-dark: #0A5E64;
   --color-border: rgba(255, 255, 255, 0.08);
   --color-border-subtle: rgba(255, 255, 255, 0.04);
-  --shadow-card: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-  --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --chart-grid: rgba(255, 255, 255, 0.06);
+  --tooltip-bg: #111617;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.08);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.14);
+}
+
+/* ── Light theme ───────────────────────────────────────────── */
+.light {
+  --color-background: #F5F7FA;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #F0F2F5;
+  --color-text: #1A202C;
+  --color-muted: #6B7280;
+  --color-brand: #0891A2;
+  --color-brand-light: #06B6D4;
+  --color-brand-dark: #155E75;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-subtle: rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+  --chart-grid: rgba(0, 0, 0, 0.06);
+  --tooltip-bg: #FFFFFF;
+  --scrollbar-thumb: rgba(0, 0, 0, 0.12);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.2);
 }
 
 html {
@@ -23,6 +48,7 @@ html {
   background-color: var(--color-background);
   color: var(--color-text);
   font-feature-settings: 'ss01' on, 'cv01' on;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
@@ -37,11 +63,12 @@ body {
   top: -40px;
   left: 0;
   background: var(--color-brand);
-  color: var(--color-background);
+  color: white;
   padding: 0.5rem 1rem;
   z-index: 50;
   transition: top 0.3s ease;
 }
+
 .skip-link:focus {
   top: 0;
 }
@@ -62,26 +89,41 @@ html {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--scrollbar-thumb);
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.14);
+  background: var(--scrollbar-thumb-hover);
 }
 
 /* Animations */
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slide-up {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {

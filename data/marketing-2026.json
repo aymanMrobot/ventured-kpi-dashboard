@@ -1,0 +1,550 @@
+{
+    "year": 2026,
+    "ytd": {
+        "mqlTarget": 1725,
+        "mqlActual": 1033,
+        "mqlAchievement": 59.9,
+        "sqlTarget": 448,
+        "sqlActual": 116,
+        "sqlAchievement": 25.9,
+        "conversionRate": 11.2,
+        "aspTarget": 3500,
+        "aspActual": 4302,
+        "pipelineTarget": 1616800,
+        "pipelineActual": 499000,
+        "pipelineAchievement": 30.9,
+        "marketingSalesTarget": 808400,
+        "marketingSalesActual": 0
+    },
+    "monthly": [
+        {
+            "month": "January",
+            "mqlTarget": 623,
+            "mqlActual": 781,
+            "mqlPct": 125.4,
+            "sqlTarget": 147,
+            "sqlActual": 83,
+            "sqlPct": 56.4,
+            "conversionRate": 10.6,
+            "aspTarget": 3500,
+            "aspActual": 3554,
+            "pipelineTarget": 468800,
+            "pipelineActual": 295000,
+            "pipelinePct": 62.9,
+            "marketingSalesTarget": 234400,
+            "marketingSalesActual": 0
+        },
+        {
+            "month": "February",
+            "mqlTarget": 567,
+            "mqlActual": 252,
+            "mqlPct": 44.4,
+            "sqlTarget": 162,
+            "sqlActual": 33,
+            "sqlPct": 20.4,
+            "conversionRate": 13.1,
+            "aspTarget": 3500,
+            "aspActual": 6182,
+            "pipelineTarget": 529600,
+            "pipelineActual": 204000,
+            "pipelinePct": 38.5,
+            "marketingSalesTarget": 264800,
+            "marketingSalesActual": 0
+        },
+        {
+            "month": "March",
+            "mqlTarget": 535,
+            "mqlActual": null,
+            "mqlPct": null,
+            "sqlTarget": 139,
+            "sqlActual": null,
+            "sqlPct": null,
+            "conversionRate": null,
+            "aspTarget": 3500,
+            "aspActual": null,
+            "pipelineTarget": 618400,
+            "pipelineActual": null,
+            "pipelinePct": null,
+            "marketingSalesTarget": 309200,
+            "marketingSalesActual": null
+        },
+        {
+            "month": "April",
+            "mqlTarget": 311,
+            "mqlActual": null,
+            "mqlPct": null,
+            "sqlTarget": 81,
+            "sqlActual": null,
+            "sqlPct": null,
+            "conversionRate": null,
+            "aspTarget": 4000,
+            "aspActual": null,
+            "pipelineTarget": 293600,
+            "pipelineActual": null,
+            "pipelinePct": null,
+            "marketingSalesTarget": 146800,
+            "marketingSalesActual": null
+        },
+        {
+            "month": "May",
+            "mqlTarget": 412,
+            "mqlActual": null,
+            "mqlPct": null,
+            "sqlTarget": 107,
+            "sqlActual": null,
+            "sqlPct": null,
+            "conversionRate": null,
+            "aspTarget": 4000,
+            "aspActual": null,
+            "pipelineTarget": 389600,
+            "pipelineActual": null,
+            "pipelinePct": null,
+            "marketingSalesTarget": 194800,
+            "marketingSalesActual": null
+        },
+        {
+            "month": "June",
+            "mqlTarget": 630,
+            "mqlActual": null,
+            "mqlPct": null,
+            "sqlTarget": 164,
+            "sqlActual": null,
+            "sqlPct": null,
+            "conversionRate": null,
+            "aspTarget": 4000,
+            "aspActual": null,
+            "pipelineTarget": 596000,
+            "pipelineActual": null,
+            "pipelinePct": null,
+            "marketingSalesTarget": 298000,
+            "marketingSalesActual": null
+        },
+        {
+            "month": "July",
+            "mqlTarget": 394,
+            "mqlActual": null,
+            "mqlPct": null,
+            "sqlTarget": 103,
+            "sqlActual": null,
+            "sqlPct": null,
+            "conversionRate": null,
+            "aspTarget": 4000,
+            "aspActual": null,
+            "pipelineTarget": 372800,
+            "pipelineActual": null,
+            "pipelinePct": null,
+            "marketingSalesTarget": 186400,
+            "marketingSalesActual": null
+        },
+        {
+            "month": "August",
+            "mqlTarget": 134,
+            "mqlActual": null,
+            "mqlPct": null,
+            "sqlTarget": 35,
+            "sqlActual": null,
+            "sqlPct": null,
+            "conversionRate": null,
+            "aspTarget": 4000,
+            "aspActual": null,
+            "pipelineTarget": 126400,
+            "pipelineActual": null,
+            "pipelinePct": null,
+            "marketingSalesTarget": 63200,
+            "marketingSalesActual": null
+        },
+        {
+            "month": "September",
+            "mqlTarget": 568,
+            "mqlActual": null,
+            "mqlPct": null,
+            "sqlTarget": 189,
+            "sqlActual": null,
+            "sqlPct": null,
+            "conversionRate": null,
+            "aspTarget": 4000,
+            "aspActual": null,
+            "pipelineTarget": 688800,
+            "pipelineActual": null,
+            "pipelinePct": null,
+            "marketingSalesTarget": 344400,
+            "marketingSalesActual": null
+        },
+        {
+            "month": "October",
+            "mqlTarget": 687,
+            "mqlActual": null,
+            "mqlPct": null,
+            "sqlTarget": 148,
+            "sqlActual": null,
+            "sqlPct": null,
+            "conversionRate": null,
+            "aspTarget": 4500,
+            "aspActual": null,
+            "pipelineTarget": 604000,
+            "pipelineActual": null,
+            "pipelinePct": null,
+            "marketingSalesTarget": 302000,
+            "marketingSalesActual": null
+        },
+        {
+            "month": "November",
+            "mqlTarget": 729,
+            "mqlActual": null,
+            "mqlPct": null,
+            "sqlTarget": 179,
+            "sqlActual": null,
+            "sqlPct": null,
+            "conversionRate": null,
+            "aspTarget": 4500,
+            "aspActual": null,
+            "pipelineTarget": 731200,
+            "pipelineActual": null,
+            "pipelinePct": null,
+            "marketingSalesTarget": 365600,
+            "marketingSalesActual": null
+        },
+        {
+            "month": "December",
+            "mqlTarget": 584,
+            "mqlActual": null,
+            "mqlPct": null,
+            "sqlTarget": 152,
+            "sqlActual": null,
+            "sqlPct": null,
+            "conversionRate": null,
+            "aspTarget": 4500,
+            "aspActual": null,
+            "pipelineTarget": 621600,
+            "pipelineActual": null,
+            "pipelinePct": null,
+            "marketingSalesTarget": 310800,
+            "marketingSalesActual": null
+        }
+    ],
+    "quarterly": [
+        {
+            "quarter": "Q1",
+            "mqlTarget": 1725,
+            "mqlActual": 1033,
+            "mqlPct": 59.9,
+            "sqlTarget": 448,
+            "sqlActual": 116,
+            "sqlPct": 25.9,
+            "conversionRate": 11.2,
+            "pipelineTarget": 1616800,
+            "pipelineActual": 499000,
+            "pipelinePct": 30.9,
+            "marketingSalesTarget": 808400
+        },
+        {
+            "quarter": "Q2",
+            "mqlTarget": 1353,
+            "mqlActual": 0,
+            "mqlPct": 0,
+            "sqlTarget": 352,
+            "sqlActual": 0,
+            "sqlPct": 0,
+            "conversionRate": null,
+            "pipelineTarget": 1279200,
+            "pipelineActual": 0,
+            "pipelinePct": 0,
+            "marketingSalesTarget": 639600
+        },
+        {
+            "quarter": "Q3",
+            "mqlTarget": 1096,
+            "mqlActual": 0,
+            "mqlPct": 0,
+            "sqlTarget": 327,
+            "sqlActual": 0,
+            "sqlPct": 0,
+            "conversionRate": null,
+            "pipelineTarget": 1188000,
+            "pipelineActual": 0,
+            "pipelinePct": 0,
+            "marketingSalesTarget": 594000
+        },
+        {
+            "quarter": "Q4",
+            "mqlTarget": 2000,
+            "mqlActual": 0,
+            "mqlPct": 0,
+            "sqlTarget": 478,
+            "sqlActual": 0,
+            "sqlPct": 0,
+            "conversionRate": null,
+            "pipelineTarget": 1956800,
+            "pipelineActual": 0,
+            "pipelinePct": 0,
+            "marketingSalesTarget": 978400
+        }
+    ],
+    "priorYears": [
+        {
+            "month": "January",
+            "mql2023": 216,
+            "mql2024": 404,
+            "mql2025": 808,
+            "mql2026Target": 623
+        },
+        {
+            "month": "February",
+            "mql2023": 162,
+            "mql2024": 457,
+            "mql2025": 374,
+            "mql2026Target": 567
+        },
+        {
+            "month": "March",
+            "mql2023": 154,
+            "mql2024": 230,
+            "mql2025": 253,
+            "mql2026Target": 535
+        },
+        {
+            "month": "April",
+            "mql2023": 210,
+            "mql2024": 197,
+            "mql2025": 280,
+            "mql2026Target": 311
+        },
+        {
+            "month": "May",
+            "mql2023": 376,
+            "mql2024": 328,
+            "mql2025": 446,
+            "mql2026Target": 412
+        },
+        {
+            "month": "June",
+            "mql2023": 299,
+            "mql2024": 343,
+            "mql2025": 304,
+            "mql2026Target": 630
+        },
+        {
+            "month": "July",
+            "mql2023": 207,
+            "mql2024": 156,
+            "mql2025": 209,
+            "mql2026Target": 394
+        },
+        {
+            "month": "August",
+            "mql2023": 49,
+            "mql2024": 83,
+            "mql2025": 118,
+            "mql2026Target": 134
+        },
+        {
+            "month": "September",
+            "mql2023": 137,
+            "mql2024": 342,
+            "mql2025": 294,
+            "mql2026Target": 568
+        },
+        {
+            "month": "October",
+            "mql2023": 148,
+            "mql2024": 334,
+            "mql2025": 359,
+            "mql2026Target": 687
+        },
+        {
+            "month": "November",
+            "mql2023": 176,
+            "mql2024": 359,
+            "mql2025": 482,
+            "mql2026Target": 729
+        },
+        {
+            "month": "December",
+            "mql2023": 101,
+            "mql2024": 162,
+            "mql2025": 278,
+            "mql2026Target": 584
+        }
+    ],
+    "priorYearsTotals": {
+        "mql2023": 2235,
+        "mql2024": 3395,
+        "mql2025": 4205,
+        "mql2026Target": 6174,
+        "yoyGrowth2024": 51.9,
+        "yoyGrowth2025": 23.9,
+        "yoyGrowth2026": 46.8
+    },
+    "yearOnYear": [
+        {
+            "month": "January",
+            "mql2025": 808,
+            "mql2026": 880,
+            "mqlYoY": 8.9,
+            "pipeline2025": 651000,
+            "pipeline2026Target": 468800,
+            "pipelineYoY": -28.0
+        },
+        {
+            "month": "February",
+            "mql2025": 374,
+            "mql2026": 528,
+            "mqlYoY": 41.2,
+            "pipeline2025": 338348,
+            "pipeline2026Target": 529600,
+            "pipelineYoY": 56.5
+        },
+        {
+            "month": "March",
+            "mql2025": 253,
+            "mql2026": 469,
+            "mqlYoY": 85.5,
+            "pipeline2025": 315557,
+            "pipeline2026Target": 618400,
+            "pipelineYoY": 96.0
+        },
+        {
+            "month": "April",
+            "mql2025": 289,
+            "mql2026": 117,
+            "mqlYoY": -59.4,
+            "pipeline2025": 216374,
+            "pipeline2026Target": 293600,
+            "pipelineYoY": 35.7
+        },
+        {
+            "month": "May",
+            "mql2025": 446,
+            "mql2026": 587,
+            "mqlYoY": 31.5,
+            "pipeline2025": 402807,
+            "pipeline2026Target": 389600,
+            "pipelineYoY": -3.3
+        },
+        {
+            "month": "June",
+            "mql2025": 304,
+            "mql2026": 704,
+            "mqlYoY": 131.6,
+            "pipeline2025": 577949,
+            "pipeline2026Target": 596000,
+            "pipelineYoY": 3.1
+        },
+        {
+            "month": "July",
+            "mql2025": 310,
+            "mql2026": 469,
+            "mqlYoY": 51.4,
+            "pipeline2025": 143482,
+            "pipeline2026Target": 372800,
+            "pipelineYoY": 159.8
+        },
+        {
+            "month": "August",
+            "mql2025": 118,
+            "mql2026": 117,
+            "mqlYoY": -0.6,
+            "pipeline2025": 44000,
+            "pipeline2026Target": 126400,
+            "pipelineYoY": 187.3
+        },
+        {
+            "month": "September",
+            "mql2025": 294,
+            "mql2026": 645,
+            "mqlYoY": 119.5,
+            "pipeline2025": 310000,
+            "pipeline2026Target": 688800,
+            "pipelineYoY": 122.2
+        },
+        {
+            "month": "October",
+            "mql2025": 359,
+            "mql2026": 587,
+            "mqlYoY": 63.4,
+            "pipeline2025": 236000,
+            "pipeline2026Target": 604000,
+            "pipelineYoY": 155.9
+        },
+        {
+            "month": "November",
+            "mql2025": 631,
+            "mql2026": 645,
+            "mqlYoY": 2.3,
+            "pipeline2025": 419000,
+            "pipeline2026Target": 731200,
+            "pipelineYoY": 74.5
+        },
+        {
+            "month": "December",
+            "mql2025": 270,
+            "mql2026": 117,
+            "mqlYoY": -56.5,
+            "pipeline2025": 100000,
+            "pipeline2026Target": 621600,
+            "pipelineYoY": 521.6
+        }
+    ],
+    "pipelineGap": [
+        {
+            "month": "January",
+            "target": 468800,
+            "actual": 50000
+        },
+        {
+            "month": "February",
+            "target": 529600,
+            "actual": null
+        },
+        {
+            "month": "March",
+            "target": 618400,
+            "actual": null
+        },
+        {
+            "month": "April",
+            "target": 293600,
+            "actual": null
+        },
+        {
+            "month": "May",
+            "target": 389600,
+            "actual": null
+        },
+        {
+            "month": "June",
+            "target": 596000,
+            "actual": null
+        },
+        {
+            "month": "July",
+            "target": 372800,
+            "actual": null
+        },
+        {
+            "month": "August",
+            "target": 126400,
+            "actual": null
+        },
+        {
+            "month": "September",
+            "target": 688800,
+            "actual": null
+        },
+        {
+            "month": "October",
+            "target": 604000,
+            "actual": null
+        },
+        {
+            "month": "November",
+            "target": 731200,
+            "actual": null
+        },
+        {
+            "month": "December",
+            "target": 621600,
+            "actual": null
+        }
+    ]
+}
