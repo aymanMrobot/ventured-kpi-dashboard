@@ -17,6 +17,10 @@ import {
   Server,
   Sun,
   Moon,
+  Banknote,
+  Box,
+  ShieldCheck,
+  UserCheck,
 } from 'lucide-react';
 import { cn } from '@/lib/utils/cn';
 import { useTheme } from '@/components/theme-provider';
@@ -31,6 +35,10 @@ const navItems: NavItem[] = [
   { href: '/overview', label: 'Overview', icon: <LayoutDashboard size={18} /> },
   { href: '/sales', label: 'Sales', icon: <TrendingUp size={18} /> },
   { href: '/marketing', label: 'Marketing', icon: <Megaphone size={18} /> },
+  { href: '/finance', label: 'Finance', icon: <Banknote size={18} /> },
+  { href: '/product', label: 'Product', icon: <Box size={18} /> },
+  { href: '/retention', label: 'Retention', icon: <ShieldCheck size={18} /> },
+  { href: '/customer-management', label: 'Customer Mgmt', icon: <UserCheck size={18} /> },
   { href: '/support', label: 'Support', icon: <Headphones size={18} /> },
   { href: '/csm', label: 'CSM', icon: <Users size={18} /> },
   { href: '/devops', label: 'DevOps', icon: <Server size={18} /> },

@@ -1,71 +1,63 @@
-import { loadMarketingData } from '@/lib/data/marketing';
+import { loadUKKpiData } from '@/lib/data/uk-kpi';
 import Topbar from '@/components/topbar';
 import SalesCharts from './sales-charts';
 
 export const dynamic = 'force-dynamic';
 
-function fmt(n: number | null | undefined, opts?: { currency?: boolean; compact?: boolean }): string {
+function fmt(n: number | null | undefined, opts?: { currency?: boolean; compact?: boolean; pct?: boolean }): string {
   if (n == null) return '—';
+  if (opts?.pct) return `${(n * 100).toFixed(1)}%`;
   if (opts?.currency && opts?.compact) {
-    if (n >= 1_000_000) return `£${(n / 1_000_000).toFixed(2)}M`;
-    if (n >= 1_000) return `£${(n / 1_000).toFixed(0)}k`;
+    if (Math.abs(n) >= 1_000_000) return `£${(n / 1_000_000).toFixed(2)}M`;
+    if (Math.abs(n) >= 1_000) return `£${(n / 1_000).toFixed(0)}k`;
     return `£${n.toLocaleString()}`;
   }
   if (opts?.currency) return `£${n.toLocaleString()}`;
   return n.toLocaleString();
 }
 
-function pctColor(pct: number | null): string {
-  if (pct == null) return 'text-[var(--color-muted)]';
-  if (pct >= 90) return 'text-emerald-500';
-  if (pct >= 60) return 'text-amber-500';
-  return 'text-red-500';
-}
-
-function borderColor(pct: number | null): string {
-  if (pct == null) return '#6B7280';
-  if (pct >= 90) return '#22c55e';
-  if (pct >= 60) return '#f59e0b';
+function statusColor(status: 'good' | 'warn' | 'bad'): string {
+  if (status === 'good') return '#22c55e';
+  if (status === 'warn') return '#f59e0b';
   return '#ef4444';
 }
 
+function statusText(status: 'good' | 'warn' | 'bad'): string {
+  if (status === 'good') return 'text-emerald-500';
+  if (status === 'warn') return 'text-amber-500';
+  return 'text-red-500';
+}
+
 export default async function SalesPage() {
-  const data = await loadMarketingData();
-  const { ytd, monthly, quarterly, yearOnYear } = data;
+  const data = await loadUKKpiData();
+  const { sales, crossSell } = data;
 
-  // Sales metrics derived from demand gen data
-  const pipelinePct = ytd.pipelineAchievement;
-  const marketingSalesPct =
-    ytd.marketingSalesTarget > 0
-      ? Math.round((ytd.marketingSalesActual / ytd.marketingSalesTarget) * 100)
-      : 0;
-  const aspPct = Math.round((ytd.aspActual / ytd.aspTarget) * 100);
-
-  // Total annual targets
-  const totalPipelineTarget = quarterly.reduce((s, q) => s + q.pipelineTarget, 0);
-  const totalSalesTarget = quarterly.reduce((s, q) => s + q.marketingSalesTarget, 0);
+  const forecastStatus: 'good' | 'warn' | 'bad' =
+    sales.currentWeekForecastPct >= 0.9 ? 'good' : sales.currentWeekForecastPct >= 0.6 ? 'warn' : 'bad';
+  const winRateStatus: 'good' | 'warn' | 'bad' =
+    sales.currentWeekWinRate >= sales.winRateTarget ? 'good' : sales.currentWeekWinRate >= sales.winRateTarget * 0.8 ? 'warn' : 'bad';
 
   return (
     <div className="flex flex-col gap-6">
-      <Topbar title="Sales" subtitle="Pipeline & Revenue · Demand Generation 2026" minDate="" maxDate="" />
+      <Topbar title="Sales" subtitle="UK Pipeline & Revenue · Weekly KPI Data" minDate="" maxDate="" />
 
-      {/* ── Revenue Achievement Badges ──────────────────── */}
+      {/* ── Hero Badges ──────────────────── */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
           {
-            label: 'YTD Pipeline Created',
-            value: fmt(ytd.pipelineActual, { currency: true, compact: true }),
-            sub: `${pipelinePct}% of ${fmt(ytd.pipelineTarget, { currency: true, compact: true })} Q1 target`,
+            label: 'Total Pipeline Gen (Current)',
+            value: fmt(sales.currentWeekTotalPipeline, { currency: true, compact: true }),
+            sub: `Target: ${fmt(sales.pipelineWeeklyTarget, { currency: true, compact: true })} weekly`,
           },
           {
-            label: 'YTD Marketing Sales',
-            value: fmt(ytd.marketingSalesActual, { currency: true, compact: true }),
-            sub: `${marketingSalesPct}% of ${fmt(ytd.marketingSalesTarget, { currency: true, compact: true })} target`,
+            label: 'Bookings Closed Won (MTD)',
+            value: fmt(sales.currentWeekBookings, { currency: true, compact: true }),
+            sub: `ASP: ${fmt(sales.currentWeekASP, { currency: true })}`,
           },
           {
-            label: 'Avg Selling Price',
-            value: fmt(ytd.aspActual, { currency: true }),
-            sub: `${aspPct}% of ${fmt(ytd.aspTarget, { currency: true })} target`,
+            label: 'Sales Forecast vs Objective',
+            value: fmt(sales.currentWeekForecastPct, { pct: true }),
+            sub: `FC: ${fmt(sales.currentWeekForecast, { currency: true, compact: true })} / Obj: ${fmt(sales.currentWeekObjective, { currency: true, compact: true })}`,
           },
         ].map((b) => (
           <div
@@ -80,62 +72,72 @@ export default async function SalesPage() {
         ))}
       </div>
 
-      {/* ── KPI Cards ─────────────────────────────────── */}
+      {/* ── KPI Cards ─────────────────────── */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'Pipeline (FY Target)', value: fmt(totalPipelineTarget, { currency: true, compact: true }), pct: pipelinePct, sub: `YTD: ${fmt(ytd.pipelineActual, { currency: true, compact: true })}` },
-          { label: 'Sales (FY Target)', value: fmt(totalSalesTarget, { currency: true, compact: true }), pct: marketingSalesPct, sub: `YTD: ${fmt(ytd.marketingSalesActual, { currency: true, compact: true })}` },
-          { label: 'SQL → Pipeline', value: `${ytd.sqlActual > 0 ? fmt(Math.round(ytd.pipelineActual / ytd.sqlActual), { currency: true }) : '—'}/SQL`, pct: null, sub: `From ${fmt(ytd.sqlActual)} SQLs` },
-          { label: 'Conversion Rate', value: `${ytd.conversionRate}%`, pct: null, sub: 'MQL → SQL funnel' },
+          {
+            label: 'Win Rate (MTD)',
+            value: fmt(sales.currentWeekWinRate, { pct: true }),
+            status: winRateStatus,
+            sub: `Target: ${fmt(sales.winRateTarget, { pct: true })}`,
+          },
+          {
+            label: 'Closed Won ASP',
+            value: fmt(sales.currentWeekASP, { currency: true }),
+            status: (sales.currentWeekASP >= sales.aspTarget ? 'good' : 'warn') as 'good' | 'warn' | 'bad',
+            sub: `Target: ${fmt(sales.aspTarget, { currency: true })}`,
+          },
+          {
+            label: 'Sales Pipeline Gen',
+            value: fmt(sales.currentWeekSalesPipeline, { currency: true, compact: true }),
+            status: 'warn' as const,
+            sub: `of total ${fmt(sales.currentWeekTotalPipeline, { currency: true, compact: true })}`,
+          },
+          {
+            label: 'Current Month Pipeline',
+            value: fmt(sales.currentMonthPipeline, { currency: true, compact: true }),
+            status: 'good' as const,
+            sub: `Qtr Open: ${fmt(sales.currentQuarterOpenPipeline, { currency: true, compact: true })}`,
+          },
         ].map((c) => (
           <div
             key={c.label}
             className="rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] p-4 border-l-[3px] transition-colors duration-300"
-            style={{ borderLeftColor: borderColor(c.pct) }}
+            style={{ borderLeftColor: statusColor(c.status) }}
           >
             <p className="text-[10px] font-semibold text-[var(--color-muted)] uppercase tracking-wider">{c.label}</p>
             <p className="text-2xl font-bold mt-1.5">{c.value}</p>
-            <p className={`text-xs mt-1 flex items-center gap-1 ${pctColor(c.pct)}`}>
-              {c.pct != null && <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ backgroundColor: borderColor(c.pct) }} />}
-              {c.pct != null ? `${c.pct}% · ` : ''}{c.sub}
+            <p className={`text-xs mt-1 flex items-center gap-1 ${statusText(c.status)}`}>
+              <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ backgroundColor: statusColor(c.status) }} />
+              {c.sub}
             </p>
           </div>
         ))}
       </div>
 
-      {/* ── Quarterly Pipeline Table ──────────────────── */}
+      {/* ── Cross-Sell Summary ─────────────────── */}
       <div className="rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] overflow-hidden transition-colors duration-300">
         <div className="px-5 py-4 border-b border-[var(--color-border)]">
-          <h2 className="text-lg font-semibold">Quarterly Pipeline & Revenue</h2>
+          <h2 className="text-lg font-semibold">Cross-Sell Performance</h2>
         </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-[var(--color-border)] text-[var(--color-muted)]">
-                <th className="px-5 py-3 text-left font-medium">Quarter</th>
-                <th className="px-5 py-3 text-right font-medium">Pipeline Target</th>
-                <th className="px-5 py-3 text-right font-medium">Pipeline Actual</th>
-                <th className="px-5 py-3 text-right font-medium">%</th>
-                <th className="px-5 py-3 text-right font-medium">Sales Target</th>
-              </tr>
-            </thead>
-            <tbody>
-              {quarterly.map((q) => (
-                <tr key={q.quarter} className="border-b border-[var(--color-border-subtle)] hover:bg-[var(--color-surface-elevated)] transition-colors">
-                  <td className="px-5 py-3 font-semibold">{q.quarter}</td>
-                  <td className="px-5 py-3 text-right">{fmt(q.pipelineTarget, { currency: true, compact: true })}</td>
-                  <td className="px-5 py-3 text-right font-medium">{fmt(q.pipelineActual, { currency: true, compact: true })}</td>
-                  <td className={`px-5 py-3 text-right font-semibold ${pctColor(q.pipelinePct)}`}>{q.pipelinePct}%</td>
-                  <td className="px-5 py-3 text-right">{fmt(q.marketingSalesTarget, { currency: true, compact: true })}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5">
+          {[
+            { label: 'Daily Sales Activity', value: fmt(crossSell.currentActivity), sub: `Target: ${fmt(crossSell.activityTarget)}` },
+            { label: 'Opps Created (MTD)', value: fmt(crossSell.currentOppsCreated), sub: `Target: ${fmt(crossSell.oppsTarget)}` },
+            { label: 'Closed Won Target', value: fmt(crossSell.closedWonTarget, { currency: true, compact: true }), sub: `Stretch: ${fmt(crossSell.closedWonStretch, { currency: true, compact: true })}` },
+            { label: 'Pipeline Value', value: fmt(crossSell.currentPipelineValue[crossSell.currentPipelineValue.length - 1]?.value, { currency: true, compact: true }), sub: 'Latest month' },
+          ].map((c) => (
+            <div key={c.label} className="p-3 rounded-lg bg-[var(--color-surface-elevated)]">
+              <p className="text-[10px] font-semibold text-[var(--color-muted)] uppercase tracking-wider">{c.label}</p>
+              <p className="text-xl font-bold mt-1">{c.value}</p>
+              <p className="text-xs text-[var(--color-muted)] mt-1">{c.sub}</p>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* ── Charts ────────────────────────────────────────── */}
-      <SalesCharts monthly={monthly} yearOnYear={yearOnYear} />
+      {/* ── Charts ────────────────────────────── */}
+      <SalesCharts sales={sales} crossSell={crossSell} />
     </div>
   );
 }
